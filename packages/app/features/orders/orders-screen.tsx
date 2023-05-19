@@ -22,6 +22,7 @@ import { createParam } from 'solito'
 import { useRouter } from 'solito/router'
 import { DateTime } from 'luxon'
 import { OrderCard } from './OrderCard'
+import { NoOrdersCard } from './NoOrdersCard'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -30,6 +31,17 @@ export function OrdersScreen() {
   const client = useClient()
   const { push } = useRouter()
   const { orders } = useOrders()
+
+  if (orders.isFetched && orders.data?.length === 0) {
+    return (
+      <YStack f={1} jc="center" ai="center">
+        <H1>Your Orders</H1>
+        <YGroup alignItems="center" width="100%" height="100%" separator={<Separator />}>
+          <NoOrdersCard />
+        </YGroup>
+      </YStack>
+    )
+  }
 
   return (
     <YStack f={1} jc="center" ai="center">
