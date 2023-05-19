@@ -5,6 +5,8 @@ import { XStack, YStack } from '@tamagui/stacks'
 import { Uploader } from 'uploader'
 import { UploadButton } from 'react-uploader'
 import { useSelector } from './context'
+import { ZStack } from '@my/ui'
+import { CheckCircle, Pencil } from '@tamagui/lucide-icons'
 
 const uploader = Uploader({ apiKey: 'public_kW15b6k48wHEjGR8criKk5RMZ1Db' }) // Your real API key.
 
@@ -20,9 +22,32 @@ const RectangleSelector = ({ setImage, setSelectedImageIndex, image, index }: an
       >
         {({ onClick }) =>
           image ? (
-            <a onClick={() => setSelectedImageIndex(index)} style={{ ...styles.image }}>
-              <Image source={image} style={{ ...styles.image }} resizeMode="contain" />
-            </a>
+            <ZStack aspectRatio={1} f={1}>
+              <Square
+                backgroundColor={'$backgroundStrong'}
+                f={1}
+                alignContent="center"
+                aspectRatio={1}
+                position={'relative'}
+                onPress={() => setSelectedImageIndex(index)}
+              >
+                <Image source={image} style={{ ...styles.image }} resizeMode="contain" />
+              </Square>
+              <Square
+                f={1}
+                alignContent="center"
+                aspectRatio={1}
+                position={'absolute'}
+                zIndex={10}
+                onPress={() => console.log('click')}
+                bottom="$0"
+                right="$0"
+              >
+                <Button onPress={onClick}>
+                  <Pencil size={'$1'} />
+                </Button>
+              </Square>
+            </ZStack>
           ) : (
             <Button
               onClick={onClick}
