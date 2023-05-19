@@ -80,7 +80,7 @@ export function OrderScreen() {
         ))}
       </XStack>
       <Separator />
-      <H3>Generated Images</H3>
+      {resultImages && <H3>Generated Images</H3>}
       {resultImages?.map((chunk) => (
         <XStack justifyContent="center" alignContent="stretch" space="$3">
           {chunk.map((image) => (

@@ -18,11 +18,12 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         <meta name="description" content="Tamagui, Solito, Expo & Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ThemeProvider>
-        <ClerkProvider {...pageProps}>
+
+      <ClerkProvider {...pageProps}>
+        <ThemeProvider>
           <Component {...pageProps} />
-        </ClerkProvider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </ClerkProvider>
     </>
   )
 }

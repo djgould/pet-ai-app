@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { ToastViewport } from './ToastViewport'
 import config from '../tamagui.config'
+import { OnboardingBoundary } from './Onboarding'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,7 +43,7 @@ export function Provider({ children, ...rest }: Omit<TamaguiProviderProps, 'conf
             ]
           }
         >
-          {children}
+          <OnboardingBoundary>{children}</OnboardingBoundary>
           <CustomToast />
           <ToastViewport />
         </ToastProvider>
