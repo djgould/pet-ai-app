@@ -17,8 +17,12 @@ export function PurchaseScreen() {
     async () => {
       const response = await client.post('/stripe/create-checkout-session', {
         order_id: id,
-        return_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/orders`,
-        cancel_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/orders`,
+        return_url: process.env.NEXT_PUBLIC_VERCEL_URL
+          ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/orders`
+          : 'http://localhost:3001/orders',
+        cancel_url: process.env.NEXT_PUBLIC_VERCEL_URL
+          ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/orders`
+          : 'http://localhost:3001/orders',
       })
       return response.data
     },
