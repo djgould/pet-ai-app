@@ -13,7 +13,7 @@ import {
   H1,
 } from '@my/ui'
 import { LinearGradient } from '@tamagui/linear-gradient'
-import { Star, ChevronRight, Moon } from '@tamagui/lucide-icons'
+import { Star, ChevronRight, Moon, Pencil, Plus } from '@tamagui/lucide-icons'
 import { useMutation } from '@tanstack/react-query'
 import { useClient } from 'app/provider/client'
 import { useOrders } from 'app/provider/Order'
@@ -23,6 +23,7 @@ import { useRouter } from 'solito/router'
 import { DateTime } from 'luxon'
 import { OrderCard } from './OrderCard'
 import { NoOrdersCard } from './NoOrdersCard'
+import { useLink } from 'solito/link'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -31,6 +32,9 @@ export function OrdersScreen() {
   const client = useClient()
   const { push } = useRouter()
   const { orders } = useOrders()
+  const linkProps = useLink({
+    href: '/selector',
+  })
 
   if (orders.isFetched && orders.data?.length === 0) {
     return (
@@ -45,7 +49,17 @@ export function OrdersScreen() {
 
   return (
     <YStack f={1} jc="center" ai="center">
-      <H1>Your Orders</H1>
+      <XStack justifyContent="center" alignItems="center">
+        <Button mt="$2" ml="$4" theme="blue" {...linkProps} opacity={0}>
+          <Plus />
+        </Button>
+        <H1 flexGrow={1} textAlign="center">
+          Your Orders
+        </H1>
+        <Button mt="$2" ml="$4" theme="blue" {...linkProps}>
+          <Plus />
+        </Button>
+      </XStack>
       <YGroup alignItems="center" width="100%" height="100%" separator={<Separator />}>
         {orders.data?.map((order) => (
           <OrderCard order={order} />
