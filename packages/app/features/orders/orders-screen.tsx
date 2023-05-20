@@ -50,13 +50,13 @@ export function OrdersScreen() {
   return (
     <YStack f={1} jc="center" ai="center">
       <XStack justifyContent="center" alignItems="center">
-        <Button mt="$2" ml="$4" theme="blue" {...linkProps} opacity={0}>
+        <Button mt="$2" ml="$4" theme="blue" {...linkProps} opacity={0} size="$3">
           <Plus />
         </Button>
         <H1 flexGrow={1} textAlign="center">
           Your Orders
         </H1>
-        <Button mt="$2" ml="$4" theme="blue" {...linkProps}>
+        <Button mt="$2" ml="$4" theme="blue" {...linkProps} size="$3">
           <Plus />
         </Button>
       </XStack>
