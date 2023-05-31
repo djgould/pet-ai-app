@@ -49,6 +49,10 @@ export function OrderScreen() {
     href: '/orders',
   })
 
+  const payLinkProps = useLink({
+    href: `/orders/${id}/payment`,
+  })
+
   const [selectedImageIds, setSelectedImageIds] = React.useState<{}>({})
 
   return (
@@ -80,7 +84,7 @@ export function OrderScreen() {
         ))}
       </XStack>
       <Separator />
-      {resultImages && <H3>Generated Images</H3>}
+      {Boolean(resultImages.length) && <H3>Generated Images</H3>}
       {resultImages?.map((chunk) => (
         <XStack justifyContent="center" alignContent="stretch" space="$3">
           {chunk.map((image) => (
@@ -123,6 +127,7 @@ export function OrderScreen() {
           ))}
         </XStack>
       ))}
+      <Button {...payLinkProps}>Complete Payment</Button>
     </YStack>
   )
 }
