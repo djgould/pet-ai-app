@@ -19,7 +19,7 @@ export function OnboardingBoundary({ children }: { children: React.ReactNode }) 
 
   if (
     (isSignedIn && window.location.pathname.startsWith('/onboarding')) ||
-    window.location.pathname === '/'
+    (isSignedIn && window.location.pathname === '/')
   ) {
     router.push('/orders')
     return (

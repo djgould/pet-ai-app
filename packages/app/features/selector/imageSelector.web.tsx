@@ -43,7 +43,7 @@ const RectangleSelector = ({ setImage, setSelectedImageIndex, image, index }: an
                 bottom="$0"
                 right="$0"
               >
-                <Button onPress={onClick}>
+                <Button onPress={onClick} size="$2">
                   <Pencil size={'$1'} />
                 </Button>
               </Square>

@@ -84,7 +84,20 @@ export function OrderScreen() {
         ))}
       </XStack>
       <Separator />
-      {Boolean(resultImages.length) && <H3>Generated Images</H3>}
+      {Boolean(resultImages.length) && (
+        <XStack space="$4">
+          <H3>Generated Images</H3>
+          <a
+            href={`https://deving-pet-ai.s3.amazonaws.com//result_images/${id}-result-images.zip`}
+            download
+          >
+            <Button>Download All</Button>
+          </a>
+          <Button>
+            {`Download Selected (${Object.values(selectedImageIds).filter((el) => el).length})`}
+          </Button>
+        </XStack>
+      )}
       {resultImages?.map((chunk) => (
         <XStack justifyContent="center" alignContent="stretch" space="$3">
           {chunk.map((image) => (

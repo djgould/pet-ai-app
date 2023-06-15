@@ -14,6 +14,7 @@ import {
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import React, { useState } from 'react'
 import { useLink } from 'solito/link'
+import imageStyles from 'app/constants/imageStyles'
 
 interface Props {
   space?: SpaceTokens
@@ -26,7 +27,7 @@ export function ImageWall({ space = '$4', imageOffset = '$-10' }: Props) {
       <YStack space={space} marginTop="$10" zIndex="$0">
         <Image
           source={{
-            uri: 'https://placekitten.com/200/200',
+            uri: imageStyles[0]?.imageUrl,
             width: 100,
             height: 100,
           }}
@@ -34,7 +35,7 @@ export function ImageWall({ space = '$4', imageOffset = '$-10' }: Props) {
 
         <Image
           source={{
-            uri: 'https://placekitten.com/200/200',
+            uri: imageStyles[1]?.imageUrl,
             width: 100,
             height: 100,
           }}
@@ -42,7 +43,7 @@ export function ImageWall({ space = '$4', imageOffset = '$-10' }: Props) {
 
         <Image
           source={{
-            uri: 'https://placekitten.com/200/200',
+            uri: imageStyles[2]?.imageUrl,
             width: 100,
             height: 100,
           }}
@@ -51,22 +52,14 @@ export function ImageWall({ space = '$4', imageOffset = '$-10' }: Props) {
       <YStack space={space} marginBottom={imageOffset} zIndex="$0">
         <Image
           source={{
-            uri: 'https://placekitten.com/200/200',
+            uri: imageStyles[3]?.imageUrl,
             width: 100,
             height: 100,
           }}
         />
         <Image
           source={{
-            uri: 'https://placekitten.com/200/200',
-            width: 100,
-            height: 100,
-          }}
-        />
-
-        <Image
-          source={{
-            uri: 'https://placekitten.com/200/200',
+            uri: imageStyles[4]?.imageUrl,
             width: 100,
             height: 100,
           }}
@@ -74,7 +67,15 @@ export function ImageWall({ space = '$4', imageOffset = '$-10' }: Props) {
 
         <Image
           source={{
-            uri: 'https://placekitten.com/200/200',
+            uri: imageStyles[5]?.imageUrl,
+            width: 100,
+            height: 100,
+          }}
+        />
+
+        <Image
+          source={{
+            uri: imageStyles[6]?.imageUrl,
             width: 100,
             height: 100,
           }}
@@ -83,14 +84,14 @@ export function ImageWall({ space = '$4', imageOffset = '$-10' }: Props) {
       <YStack space={space} marginTop="$10" zIndex="$0">
         <Image
           source={{
-            uri: 'https://placekitten.com/200/200',
+            uri: imageStyles[7]?.imageUrl,
             width: 100,
             height: 100,
           }}
         />
         <Image
           source={{
-            uri: 'https://placekitten.com/200/200',
+            uri: imageStyles[8]?.imageUrl,
             width: 100,
             height: 100,
           }}
@@ -98,7 +99,7 @@ export function ImageWall({ space = '$4', imageOffset = '$-10' }: Props) {
 
         <Image
           source={{
-            uri: 'https://placekitten.com/200/200',
+            uri: imageStyles[9]?.imageUrl,
             width: 100,
             height: 100,
           }}

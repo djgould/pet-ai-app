@@ -1,4 +1,4 @@
-import { Card, H2, Paragraph, XStack, Spinner, Button, H1, YStack, Image } from '@my/ui'
+import { Card, H2, Paragraph, XStack, Spinner, Button, H1, YStack, Image, Progress } from '@my/ui'
 import { AlertCircle, Moon } from '@tamagui/lucide-icons'
 import { DateTime } from 'luxon'
 import { Link, useLink } from 'solito/link'
@@ -41,22 +41,28 @@ export function OrderCard({ order }) {
         width="100%"
         paddingHorizontal="$4"
       >
-        {order?.trainingImages?.map((image) => {
-          return <Image source={{ uri: image.url }} aspectRatio={1} />
-        })}
+        {order.resultImages?.length > 0
+          ? order?.resultImages?.map((image) => {
+              return <Image source={{ uri: image.url }} aspectRatio={1} />
+            })
+          : order?.trainingImages?.map((image) => {
+              return <Image source={{ uri: image.url }} aspectRatio={1} />
+            })}
       </XStack>
       <Card.Footer padded>
         <XStack flex={1} />
         <Button borderRadius="$10">{getOrderButtonText(order)}</Button>
       </Card.Footer>
-      <CardBackground status={order.status} />
+      <CardBackground status={order.status} eta={order.eta} />
     </Card>
   )
 }
 
 function OrderStatus({ status }) {
-  if (status === 'PENDING' || status === 'UPLOADING_MODEL' || status === 'INFERING') {
+  if (status === 'UPLOADING_MODEL' || status === 'INFERING' || status === 'TRAINING') {
     return <H2>Generating Images</H2>
+  } else if (status === 'PENDING') {
+    return <H2>Payment Required</H2>
   } else if (status === 'COMPLETED') {
     return <H2>Completed</H2>
   } else if (status === 'FAILED') {
@@ -66,9 +72,9 @@ function OrderStatus({ status }) {
   return <H2>{status}</H2>
 }
 
-function getOrderButtonText({ status }) {
-  if (status === 'PENDING' || status === 'UPLOADING_MODEL' || status === 'INFERING') {
-    return 'ETA 12min'
+function getOrderButtonText({ status, eta }) {
+  if (status === 'UPLOADING_MODEL' || status === 'INFERING' || status === 'TRAINING') {
+    return `ETA ${Math.floor(eta / 60)} minutes ${eta % 60} seconds`
   } else if (status === 'COMPLETED') {
     return 'View Order'
   } else if (status === 'FAILED') {
@@ -78,11 +84,13 @@ function getOrderButtonText({ status }) {
   return 'Contact Support'
 }
 
-function CardBackground({ status }) {
-  if (status === 'PENDING') {
+function CardBackground({ status, eta }) {
+  if (status === 'UPLOADING_MODEL' || status === 'INFERING' || status === 'TRAINING') {
     return (
-      <Card.Background justifyContent="center">
-        <Spinner size="large" alignSelf="center" />
+      <Card.Background justifyContent="flex-end" paddingHorizontal="$4" pb="$2">
+        <Progress value={Math.max(((1900 - eta) / 1900) * 100 || 0, 2)}>
+          <Progress.Indicator animation="bouncy" />
+        </Progress>
       </Card.Background>
     )
   } else if (status === 'COMPLETE') {

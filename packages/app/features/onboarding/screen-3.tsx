@@ -16,6 +16,7 @@ import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import React, { useState } from 'react'
 import { useLink } from 'solito/link'
 import { ImageWall } from './ImageWall'
+import { ImageWall5 } from './ImageWall5'
 
 export function Screen3() {
   const linkProps = useLink({
@@ -45,7 +46,14 @@ export function Screen3() {
         </XStack>
       </YStack>
 
-      <ImageWall />
+      <Image
+        source={{
+          uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/4a50946d-b579-4892-a765-89b8e7339e00/public',
+        }}
+        width="100%"
+        maxWidth={600}
+        aspectRatio={1}
+      />
     </YStack>
   )
 }

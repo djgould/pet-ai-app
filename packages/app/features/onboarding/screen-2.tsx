@@ -23,7 +23,7 @@ export function Screen2() {
   })
 
   return (
-    <YStack f={1} jc="center" ai="center" fullscreen overflow="hidden">
+    <YStack f={1} jc="flex-start" ai="center" fullscreen overflow="hidden">
       <YStack fullscreen zIndex={'$1'} f={1} jc="flex-end" ai="center">
         <LinearGradient
           position="absolute"
@@ -43,8 +43,15 @@ export function Screen2() {
           <Button {...linkProps}>Next</Button>
         </XStack>
       </YStack>
-
-      <ImageWall />
+      <Image
+        source={{
+          uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/2f31c428-4657-4b09-2f43-b31142b0b400/public',
+        }}
+        maxWidth={300}
+        width="100%"
+        aspectRatio={0.53}
+        jc="flex-start"
+      />
     </YStack>
   )
 }
