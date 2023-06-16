@@ -1,9 +1,6 @@
 import { authMiddleware } from '@clerk/nextjs'
 
 export default authMiddleware({
-  beforeAuth(req, evt) {
-    console.log(req, evt)
-  },
   publicRoutes: ['/', '/onboarding/(.*)'],
 })
 

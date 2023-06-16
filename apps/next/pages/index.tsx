@@ -10,13 +10,16 @@ export default function Page() {
   const linkProps = useLink({
     href: '/onboarding/0',
   })
+  const dashboardLinkProps = useLink({
+    href: '/orders',
+  })
 
   const { isLoaded, isSignedIn } = useAuth()
 
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>CharlieAI</title>
       </Head>
       <YStack>
         <XStack
@@ -37,7 +40,9 @@ export default function Page() {
             <H2>CharlieAI</H2>
           </XStack>
           {isLoaded && (
-            <Button backgroundColor="$blue8">{isSignedIn ? 'Dashboard' : 'Sign In'}</Button>
+            <Button backgroundColor="$blue8" {...dashboardLinkProps}>
+              {isSignedIn ? 'Dashboard' : 'Sign In'}
+            </Button>
           )}
         </XStack>
         <YStack alignItems="center" space="$4">

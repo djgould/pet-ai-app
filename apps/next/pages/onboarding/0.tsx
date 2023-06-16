@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>User</title>
+        <title>CharlieAI</title>
       </Head>
       <HomeScreen />
     </>

@@ -39,8 +39,6 @@ export const SelectorProvider = ({ children }) => {
   const [images, setImages] = useStatePersist('@images', [null, null, null, null, null])
   const [selectedImageIndex, setSelectedImageIndex] = useState(-1)
 
-  console.log(images)
-
   const setImage = useCallback((image, index) => {
     const newImages = [...images]
     newImages[index] = image

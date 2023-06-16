@@ -35,7 +35,6 @@ export function useOrders() {
 
 export function useOrder(id?: string) {
   const client = useClient()
-  console.log(id)
   const order = useQuery(
     ['orders', id],
     async () => {
