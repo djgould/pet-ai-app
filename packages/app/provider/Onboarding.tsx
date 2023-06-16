@@ -17,10 +17,7 @@ export function OnboardingBoundary({ children }: { children: React.ReactNode }) 
   console.log('isSignedIn', isSignedIn)
   console.log('window.location.pathname', window.location.pathname)
 
-  if (
-    (isSignedIn && window.location.pathname.startsWith('/onboarding')) ||
-    (isSignedIn && window.location.pathname === '/')
-  ) {
+  if (isSignedIn && window.location.pathname.startsWith('/onboarding')) {
     router.push('/orders')
     return (
       <YStack jc="center" ai="center">
