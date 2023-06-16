@@ -4,11 +4,14 @@ import { Twitter } from '@tamagui/lucide-icons'
 import { LinearGradient } from '@tamagui/linear-gradient'
 import { useLink } from 'solito/link'
 import Head from 'next/head'
+import { useAuth } from '@clerk/nextjs'
 
 export default function Page() {
   const linkProps = useLink({
     href: '/onboarding/0',
   })
+
+  const { isLoaded, isSignedIn } = useAuth()
 
   return (
     <>
@@ -16,8 +19,26 @@ export default function Page() {
         <title>Home</title>
       </Head>
       <YStack>
-        <XStack padding={'$4'} borderBottomWidth={'$1'} borderBottomColor={'$gray6'}>
-          <H2>CharlieAI</H2>
+        <XStack
+          padding={'$4'}
+          borderBottomWidth={'$1'}
+          borderBottomColor={'$gray6'}
+          justifyContent="space-between"
+        >
+          <XStack alignItems="center" space="$4">
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/4fa8c284-c91b-49f3-87d9-0387e7d50900/public',
+              }}
+              width="50px"
+              height="50px"
+              borderRadius="50px"
+            />
+            <H2>CharlieAI</H2>
+          </XStack>
+          {isLoaded && (
+            <Button backgroundColor="$blue8">{isSignedIn ? 'Dashboard' : 'Sign In'}</Button>
+          )}
         </XStack>
         <YStack alignItems="center" space="$4">
           <LinearGradient
