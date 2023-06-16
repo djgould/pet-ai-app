@@ -90,7 +90,7 @@ export default function Page() {
           </XStack>
           <XStack maxWidth={600} justifyContent={'center'}>
             <Paragraph textAlign="center">
-              Take pictures of your pup and generate a hundred new and fun images. Join thousands of
+              Take pictures of your dog and generate a hundred new and fun images. Join thousands of
               happy customers and have fun with your pup today!
             </Paragraph>
           </XStack>
