@@ -46,14 +46,14 @@ export default function Page() {
           )}
         </XStack>
         <YStack alignItems="center" space="$4">
-          <LinearGradient
-            position="absolute"
-            colors={['transparent', 'rgba(0, 0, 255, 0.1)', 'transparent']}
-            start={[0, 0]}
-            end={[1, 1]}
-            width="100%"
-            maxWidth={650}
-            height="50%"
+          <div
+            style={{
+              maxWidth: '650px',
+              width: '100%',
+              height: '30%',
+              position: 'absolute',
+              background: 'radial-gradient(rgba(0, 0, 255, .6), transparent, transparent)',
+            }}
           />
           <XStack
             marginTop="$10"

@@ -9,6 +9,7 @@ import Head from 'next/head'
 import React from 'react'
 import type { SolitoAppProps } from 'solito'
 import { ClerkProvider } from '@clerk/nextjs'
+import { Analytics } from '@vercel/analytics/react'
 
 function MyApp({ Component, pageProps }: SolitoAppProps) {
   return (
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
           <Component {...pageProps} />
         </ThemeProvider>
       </ClerkProvider>
+      <Analytics />
     </>
   )
 }
