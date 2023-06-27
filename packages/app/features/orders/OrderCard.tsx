@@ -21,6 +21,7 @@ export function OrderCard({ order }) {
       hoverStyle={{ scale: 0.925 }}
       pressStyle={{ scale: 0.875 }}
       {...linkProps}
+      overflow="hidden"
     >
       <Card.Header padded>
         <XStack>
@@ -42,10 +43,10 @@ export function OrderCard({ order }) {
         paddingHorizontal="$4"
       >
         {order.resultImages?.length > 0
-          ? order?.resultImages?.map((image) => {
+          ? order?.resultImages?.slice(0, 5).map((image) => {
               return <Image source={{ uri: image.url }} aspectRatio={1} />
             })
-          : order?.trainingImages?.map((image) => {
+          : order?.trainingImages?.slice(0, 5).map((image) => {
               return <Image source={{ uri: image.url }} aspectRatio={1} />
             })}
       </XStack>
