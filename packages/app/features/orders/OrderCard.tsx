@@ -41,6 +41,7 @@ export function OrderCard({ order }) {
         space="$4"
         width="100%"
         paddingHorizontal="$4"
+        overflow="hidden"
       >
         {order.resultImages?.length > 0
           ? order?.resultImages?.slice(0, 5).map((image) => {
