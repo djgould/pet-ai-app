@@ -184,7 +184,7 @@ export function PurchaseScreen() {
           </Paragraph>
         </YStack>
 
-        <XStack marginBottom="$4">
+        <XStack marginBottom="$4" space="$4">
           <Button
             onPress={() => createFreePurchase.mutate()}
             disabled={createFreePurchase.isLoading}
