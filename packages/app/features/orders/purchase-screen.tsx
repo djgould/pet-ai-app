@@ -35,6 +35,18 @@ export function PurchaseScreen() {
     }
   )
 
+  const createFreePurchase = useMutation(
+    async () => {
+      const response = await client.post(`/orders/${id}/free`)
+      return response.data
+    },
+    {
+      onSuccess: (data) => {
+        push('/orders')
+      },
+    }
+  )
+
   const STYLES = [
     {
       title: 'Cowboy',
@@ -173,6 +185,12 @@ export function PurchaseScreen() {
         </YStack>
 
         <XStack marginBottom="$4">
+          <Button
+            onPress={() => createFreePurchase.mutate()}
+            disabled={createFreePurchase.isLoading}
+          >
+            {createFreePurchase.isLoading ? <Spinner size="small" color="$green10" /> : 'Free'}
+          </Button>
           <Button
             onPress={() => createCheckoutSession.mutate()}
             disabled={createCheckoutSession.isLoading}

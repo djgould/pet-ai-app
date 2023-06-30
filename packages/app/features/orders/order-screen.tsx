@@ -70,7 +70,7 @@ export function OrderScreen() {
           <ArrowLeft />
         </Button>
       </XStack>
-      <H2 textAlign="center">Order Status: {order.data?.status}</H2>
+      <H2 textAlign="center">{getOrderStatus(order)}</H2>
       <Paragraph theme="alt2" textAlign="center">
         Order created on {DateTime.fromISO(order.data?.createdAt).toFormat("MM-dd-yy 'at' HH:mm")}
       </Paragraph>
@@ -143,4 +143,18 @@ export function OrderScreen() {
       <Button {...payLinkProps}>Complete Payment</Button>
     </YStack>
   )
+}
+
+function getOrderStatus({ status }) {
+  if (status === 'UPLOADING_MODEL' || status === 'INFERING' || status === 'TRAINING') {
+    return 'Generating Images'
+  } else if (status === 'PENDING') {
+    return 'Payment Required'
+  } else if (status === 'COMPLETED') {
+    return 'Completed'
+  } else if (status === 'FAILED') {
+    return 'Failed'
+  }
+
+  return status
 }
