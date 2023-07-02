@@ -189,7 +189,11 @@ export function PurchaseScreen() {
             onPress={() => createFreePurchase.mutate()}
             disabled={createFreePurchase.isLoading}
           >
-            {createFreePurchase.isLoading ? <Spinner size="small" color="$green10" /> : 'Free'}
+            {createFreePurchase.isLoading ? (
+              <Spinner size="small" color="$green10" />
+            ) : (
+              'Free (1 Style)'
+            )}
           </Button>
           <Button
             onPress={() => createCheckoutSession.mutate()}
@@ -198,7 +202,7 @@ export function PurchaseScreen() {
             {createCheckoutSession.isLoading ? (
               <Spinner size="small" color="$green10" />
             ) : (
-              'Pay $10'
+              '$10 (10 Styles)'
             )}
           </Button>
         </XStack>

@@ -26,6 +26,7 @@ import { useRouter } from 'solito/router'
 import { DateTime } from 'luxon'
 import { OrderCard } from './OrderCard'
 import { useLink } from 'solito/link'
+import ResultImage from './ResultImage'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -112,15 +113,7 @@ export function OrderScreen() {
                 })
               }
             >
-              <Square
-                backgroundColor={'$backgroundStrong'}
-                f={1}
-                alignContent="center"
-                aspectRatio={1}
-                position={'relative'}
-              >
-                <Image position="relative" source={{ uri: image.url }} width="100%" height="100%" />
-              </Square>
+              <ResultImage url={image.url as string} />
 
               {
                 /* calculate index of image in the array of selectedImagesIndex */
