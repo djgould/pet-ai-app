@@ -1,16 +1,16 @@
 import { Image, Square } from '@my/ui'
-import { useEffect } from 'react'
-import React = require('react')
-import * as watermark from 'watermarkjs'
+import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+const watermark = dynamic(() => import('watermarkjs'), { ssr: false })
 
 export interface Props {
   url: string
 }
 
 export default function ResultImage({ url }: Props) {
-  const [watermarkUrl, setWatermarkUrl] = React.useState<string | null>(null)
+  const [watermarkUrl, setWatermarkUrl] = useState<string | null>(null)
   useEffect(() => {
-    console.log('ResultImage useEffect')
+    if (typeof window === 'undefined') return
     watermark(url)
       .image(watermark.text.lowerLeft('watermark.js', '48px Josefin Slab', '#fff', 0.5))
       .dataUrl(function (img) {
