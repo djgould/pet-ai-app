@@ -2,6 +2,7 @@ import { Image, Square } from '@my/ui'
 import { useEffect } from 'react'
 import React = require('react')
 import * as watermark from 'watermarkjs'
+
 export interface Props {
   url: string
 }
