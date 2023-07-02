@@ -71,7 +71,7 @@ export function OrderScreen() {
           <ArrowLeft />
         </Button>
       </XStack>
-      <H2 textAlign="center">{getOrderStatus(order.data)}</H2>
+      <H2 textAlign="center">{order.data && getOrderStatus(order.data)}</H2>
       <Paragraph theme="alt2" textAlign="center">
         Order created on {DateTime.fromISO(order.data?.createdAt).toFormat("MM-dd-yy 'at' HH:mm")}
       </Paragraph>
