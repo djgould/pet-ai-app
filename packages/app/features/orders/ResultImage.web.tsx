@@ -1,20 +1,22 @@
 import { Image, Square } from '@my/ui'
-import * as watermark from 'watermarkjs';
+import { useEffect } from 'react'
+import React = require('react')
+import * as watermark from 'watermarkjs'
 export interface Props {
   url: string
 }
 
 export default function ResultImage({ url }: Props) {
   const [watermarkUrl, setWatermarkUrl] = React.useState<string | null>(null)
-  const useEffect(() => {
+  useEffect(() => {
     console.log('ResultImage useEffect')
     watermark(url)
       .image(watermark.text.lowerLeft('watermark.js', '48px Josefin Slab', '#fff', 0.5))
       .dataUrl(function (img) {
-        setWatermarkUrl(img.src);
-      });
+        setWatermarkUrl(img.src)
+      })
   }, [url])
-  if (!watermarkUrl) return null;
+  if (!watermarkUrl) return null
   return (
     <Square
       backgroundColor={'$backgroundStrong'}
