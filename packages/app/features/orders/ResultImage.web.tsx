@@ -1,7 +1,5 @@
 import { Image, Square } from '@my/ui'
 import { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
-const watermark = dynamic(() => import('watermarkjs'), { ssr: false })
 
 export interface Props {
   url: string
@@ -11,15 +9,19 @@ export default function ResultImage({ url }: Props) {
   const [watermarkUrl, setWatermarkUrl] = useState<string | null>(null)
   useEffect(() => {
     if (typeof window === 'undefined') return
-    try {
-      watermark(url)
-        .image(watermark.text.lowerLeft('watermark.js', '48px Josefin Slab', '#fff', 0.5))
-        .dataUrl(function (img) {
-          setWatermarkUrl(img.src)
-        })
-    } catch (e) {
-      console.error(e)
+    const run = async () => {
+      const watermark = (await import('watermarkjs')).default
+      try {
+        watermark(url)
+          .image(watermark.text.lowerLeft('watermark.js', '48px Josefin Slab', '#fff', 0.5))
+          .dataUrl(function (img) {
+            setWatermarkUrl(img.src)
+          })
+      } catch (e) {
+        console.error(e)
+      }
     }
+    run()
   }, [url])
   if (!watermarkUrl) return null
   return (
