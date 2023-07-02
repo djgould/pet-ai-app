@@ -23,6 +23,7 @@ export default function ResultImage({ url }: Props) {
     }
     run()
   }, [url])
+  console.log(watermarkUrl)
   if (!watermarkUrl) return null
   return (
     <Square
