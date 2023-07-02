@@ -12,11 +12,12 @@ export default function ResultImage({ url }: Props) {
     const run = async () => {
       const watermark = (await import('watermarkjs')).default
       try {
-        setWatermarkUrl(
-          await watermark(url).dataUrl(
-            watermark.text.lowerLeft('watermark.js', '48px Josefin Slab', '#fff', 0.5)
-          )
-        )
+        watermark(url)
+          .dataUrl(watermark.text.lowerLeft('watermark.js', '48px Josefin Slab', '#fff', 0.5))
+          .then((dataUrl) => {
+            console.log(dataUrl)
+            setWatermarkUrl(dataUrl)
+          })
       } catch (e) {
         console.error(e)
       }
