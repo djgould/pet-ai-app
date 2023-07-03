@@ -27,6 +27,7 @@ import { DateTime } from 'luxon'
 import { OrderCard } from './OrderCard'
 import { useLink } from 'solito/link'
 import ResultImage from './ResultImage'
+import axios from 'axios'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -55,6 +56,33 @@ export function OrderScreen() {
   })
 
   const [selectedImageIds, setSelectedImageIds] = React.useState<{}>({})
+
+  const handleDownload = async () => {
+    try {
+      const response = await client.post(
+        `/orders/${id}/download-selected`,
+        {
+          images: selectedImageIds,
+        },
+        {
+          responseType: 'blob',
+        }
+      )
+
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'images.zip')
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+
+      // Reset selected images
+      setSelectedImageIds([])
+    } catch (error) {
+      console.error('Error downloading file:', error)
+    }
+  }
 
   return (
     <YStack
@@ -98,7 +126,7 @@ export function OrderScreen() {
           >
             <Button>Download All</Button>
           </a>
-          <Button>
+          <Button onPress={handleDownload}>
             {`Download Selected (${Object.values(selectedImageIds).filter((el) => el).length})`}
           </Button>
         </XStack>
