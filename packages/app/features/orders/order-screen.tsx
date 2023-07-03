@@ -16,7 +16,15 @@ import {
   ZStack,
 } from '@my/ui'
 import { LinearGradient } from '@tamagui/linear-gradient'
-import { Star, ChevronRight, Moon, ArrowLeft, CheckCheck, CheckCircle } from '@tamagui/lucide-icons'
+import {
+  Star,
+  ChevronRight,
+  Moon,
+  ArrowLeft,
+  CheckCheck,
+  CheckCircle,
+  Download,
+} from '@tamagui/lucide-icons'
 import { useMutation } from '@tanstack/react-query'
 import { useClient } from 'app/provider/client'
 import { useOrder } from 'app/provider/Order'
@@ -81,6 +89,18 @@ export function OrderScreen() {
     setSelectedImageIds([])
   })
 
+  // resultImages have a label and we want to group them by label
+  const groupedResultImages = React.useMemo(() => {
+    const grouped = {}
+    order.data?.resultImages?.forEach((image) => {
+      if (!grouped[image.label]) {
+        grouped[image.label] = []
+      }
+      grouped[image.label].push(image)
+    })
+    return grouped
+  }, [order.data?.resultImages])
+
   return (
     <YStack
       space="$3"
@@ -110,38 +130,37 @@ export function OrderScreen() {
         ))}
       </XStack>
       <Separator />
-      <Card
-        elevate
-        size="$4"
-        borderRadius={'$4'}
-        width="100%"
-        height={100}
-        animation="bouncy"
-        hoverStyle={{ scale: 1.015 }}
-        {...payLinkProps}
-      >
-        <Card.Header padded>
-          <XStack justifyContent="space-between" alignItems="center">
-            <YStack>
-              <H2 color="white">Upgrade for $10</H2>
-              <Paragraph color="white">Get all 10 Styles with no watermark for $10</Paragraph>
-            </YStack>
-            <Button borderRadius="$10" {...payLinkProps}>
-              Purchase
-            </Button>
-          </XStack>
-        </Card.Header>
-        <Card.Background>
-          <LinearGradient
-            position="absolute"
-            colors={['rgb(221, 93, 94)', 'rgb(123, 131, 213)']}
-            locations={[0.3, 1.0]}
-            direction="rtl"
-            width="100%"
-            height="100%"
-          />
-        </Card.Background>
-      </Card>
+      {order.data?.tier === 'free' && (
+        <Card
+          elevate
+          size="$4"
+          borderRadius={'$4'}
+          width="100%"
+          height={100}
+          animation="bouncy"
+          hoverStyle={{ scale: 1.015 }}
+          {...payLinkProps}
+        >
+          <Card.Header padded>
+            <XStack justifyContent="space-between" alignItems="center">
+              <YStack>
+                <H2 color="white">Upgrade for $10</H2>
+                <Paragraph color="white">Get all 10 Styles with no watermark for $10</Paragraph>
+              </YStack>
+            </XStack>
+          </Card.Header>
+          <Card.Background>
+            <LinearGradient
+              position="absolute"
+              colors={['rgb(221, 93, 94)', 'rgb(123, 131, 213)']}
+              locations={[0.3, 1.0]}
+              direction="rtl"
+              width="100%"
+              height="100%"
+            />
+          </Card.Background>
+        </Card>
+      )}
       {Boolean(resultImages.length) && (
         <XStack space="$4">
           <H3>Generated Images</H3>
@@ -153,7 +172,9 @@ export function OrderScreen() {
             }
             download
           >
-            <Button>Download All</Button>
+            <Button>
+              <Download />
+            </Button>
           </a>
           <Button onPress={() => downloadSelected.mutate()} disabled={downloadSelected.isLoading}>
             {downloadSelected.isLoading ? (
@@ -164,46 +185,53 @@ export function OrderScreen() {
           </Button>
         </XStack>
       )}
-      {resultImages?.map((chunk) => (
-        <XStack justifyContent="center" alignContent="stretch" space="$3">
-          {chunk.map((image) => (
-            <ZStack
-              aspectRatio={1}
-              f={1}
-              position="relative"
-              onPress={() =>
-                setSelectedImageIds({
-                  ...selectedImageIds,
-                  [image.id]: !selectedImageIds[image.id],
-                })
-              }
-            >
-              <ResultImage
-                url={
-                  order.data.tier === 'free'
-                    ? (image.watermarkedUrl as string)
-                    : (image.url as string)
-                }
-              />
-
-              {
-                /* calculate index of image in the array of selectedImagesIndex */
-                selectedImageIds[image.id] && (
-                  <XStack
-                    jc="center"
-                    alignItems="center"
-                    zIndex={10}
-                    height="100%"
-                    backgroundColor={'rgba(52, 52, 52, 0.7)'}
+      {Object.entries(groupedResultImages).map(([label, images]) => {
+        return (
+          <YStack space="$2">
+            <H3>{label.toUpperCase()}</H3>
+            {splitArray(images, 5)?.map((chunk) => (
+              <XStack justifyContent="center" alignContent="stretch" space="$2">
+                {chunk.map((image) => (
+                  <ZStack
+                    aspectRatio={1}
+                    f={1}
+                    position="relative"
+                    onPress={() =>
+                      setSelectedImageIds({
+                        ...selectedImageIds,
+                        [image.id]: !selectedImageIds[image.id],
+                      })
+                    }
                   >
-                    <CheckCircle size={'$8'} />
-                  </XStack>
-                )
-              }
-            </ZStack>
-          ))}
-        </XStack>
-      ))}
+                    <ResultImage
+                      url={
+                        order.data.tier === 'free'
+                          ? (image.watermarkedUrl as string)
+                          : (image.url as string)
+                      }
+                    />
+
+                    {
+                      /* calculate index of image in the array of selectedImagesIndex */
+                      selectedImageIds[image.id] && (
+                        <XStack
+                          jc="center"
+                          alignItems="center"
+                          zIndex={10}
+                          height="100%"
+                          backgroundColor={'rgba(52, 52, 52, 0.7)'}
+                        >
+                          <CheckCircle size={'$8'} />
+                        </XStack>
+                      )
+                    }
+                  </ZStack>
+                ))}
+              </XStack>
+            ))}
+          </YStack>
+        )
+      })}
     </YStack>
   )
 }
