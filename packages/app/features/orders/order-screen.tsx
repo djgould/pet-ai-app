@@ -56,35 +56,30 @@ export function OrderScreen() {
   })
 
   const [selectedImageIds, setSelectedImageIds] = React.useState<{}>({})
+  const downloadSelected = useMutation(async () => {
+    const response = await client.post(
+      `/orders/${id}/download-selected`,
+      {
+        ids: Object.entries(selectedImageIds)
+          .filter(([, value]) => value)
+          .map(([key]) => key),
+      },
+      {
+        responseType: 'blob',
+      }
+    )
 
-  const handleDownload = async () => {
-    try {
-      const response = await client.post(
-        `/orders/${id}/download-selected`,
-        {
-          ids: Object.entries(selectedImageIds)
-            .filter(([, value]) => value)
-            .map(([key]) => key),
-        },
-        {
-          responseType: 'blob',
-        }
-      )
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', 'images.zip')
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
 
-      const url = window.URL.createObjectURL(new Blob([response.data]))
-      const link = document.createElement('a')
-      link.href = url
-      link.setAttribute('download', 'images.zip')
-      document.body.appendChild(link)
-      link.click()
-      link.remove()
-
-      // Reset selected images
-      setSelectedImageIds([])
-    } catch (error) {
-      console.error('Error downloading file:', error)
-    }
-  }
+    // Reset selected images
+    setSelectedImageIds([])
+  })
 
   return (
     <YStack
@@ -128,8 +123,12 @@ export function OrderScreen() {
           >
             <Button>Download All</Button>
           </a>
-          <Button onPress={handleDownload}>
-            {`Download Selected (${Object.values(selectedImageIds).filter((el) => el).length})`}
+          <Button onPress={() => downloadSelected.mutate()} disabled={downloadSelected.isLoading}>
+            {downloadSelected.isLoading ? (
+              <Spinner size="small" color="$green10" />
+            ) : (
+              `Download Selected (${Object.values(selectedImageIds).filter((el) => el).length})`
+            )}
           </Button>
         </XStack>
       )}
