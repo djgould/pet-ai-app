@@ -134,7 +134,7 @@ export function OrderScreen() {
         <Card.Background>
           <LinearGradient
             position="absolute"
-            colors={['#e66465', '#9198e5']}
+            colors={['rgb(221, 93, 94)', 'rgb(123, 131, 213)']}
             locations={[0.3, 1.0]}
             direction="rtl"
             width="100%"
