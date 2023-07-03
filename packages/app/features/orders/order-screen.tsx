@@ -89,7 +89,11 @@ export function OrderScreen() {
         <XStack space="$4">
           <H3>Generated Images</H3>
           <a
-            href={`https://deving-pet-ai.s3.amazonaws.com//result_images/${id}-result-images.zip`}
+            href={
+              order.data.tier === 'free'
+                ? `https://deving-pet-ai.s3.amazonaws.com//result_images/${id}-watermarked-result-images.zip`
+                : `https://deving-pet-ai.s3.amazonaws.com//result_images/${id}-result-images.zip`
+            }
             download
           >
             <Button>Download All</Button>
