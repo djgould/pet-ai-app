@@ -192,7 +192,7 @@ export function PurchaseScreen() {
             {createFreePurchase.isLoading ? (
               <Spinner size="small" color="$green10" />
             ) : (
-              'Free (1 Style)'
+              'Free (1 Style w/ Watermark)'
             )}
           </Button>
           <Button
