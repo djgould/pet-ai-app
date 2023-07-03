@@ -62,7 +62,9 @@ export function OrderScreen() {
       const response = await client.post(
         `/orders/${id}/download-selected`,
         {
-          ids: selectedImageIds,
+          ids: Object.entries(selectedImageIds)
+            .filter(([, value]) => value)
+            .map(([key]) => key),
         },
         {
           responseType: 'blob',
