@@ -110,6 +110,38 @@ export function OrderScreen() {
         ))}
       </XStack>
       <Separator />
+      <Card
+        elevate
+        size="$4"
+        borderRadius={'$4'}
+        width="100%"
+        height={100}
+        animation="bouncy"
+        hoverStyle={{ scale: 1.015 }}
+        {...payLinkProps}
+      >
+        <Card.Header padded>
+          <XStack justifyContent="space-between" alignItems="center">
+            <YStack>
+              <H2 color="$gray3Dark">Upgrade for $10</H2>
+              <Paragraph color="black">Get all 10 Styles with no watermark for $10</Paragraph>
+            </YStack>
+            <Button borderRadius="$10" {...payLinkProps}>
+              Purchase
+            </Button>
+          </XStack>
+        </Card.Header>
+        <Card.Background>
+          <LinearGradient
+            position="absolute"
+            colors={['#e66465', '#9198e5']}
+            locations={[0.3, 1.0]}
+            direction="rtl"
+            width="100%"
+            height="100%"
+          />
+        </Card.Background>
+      </Card>
       {Boolean(resultImages.length) && (
         <XStack space="$4">
           <H3>Generated Images</H3>
@@ -172,7 +204,6 @@ export function OrderScreen() {
           ))}
         </XStack>
       ))}
-      <Button {...payLinkProps}>Complete Payment</Button>
     </YStack>
   )
 }

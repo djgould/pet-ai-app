@@ -2,7 +2,7 @@ import { Button, Paragraph, XStack, YStack, H2, Spinner, Square, Image } from '@
 import { LinearGradient } from '@tamagui/linear-gradient'
 import { useMutation } from '@tanstack/react-query'
 import { useClient } from 'app/provider/client'
-import { useOrder } from 'app/provider/Order'
+import { useOrder, useOrders } from 'app/provider/Order'
 import React from 'react'
 import { createParam } from 'solito'
 import { useRouter } from 'solito/router'
@@ -14,6 +14,9 @@ export function PurchaseScreen() {
   const client = useClient()
   const { push } = useRouter()
   const order = useOrder(id)
+  const { orders } = useOrders()
+
+  const usedFree = orders.data?.filter((order) => order.tier === 'free').length > 0
 
   const createCheckoutSession = useMutation(
     async () => {
@@ -187,7 +190,8 @@ export function PurchaseScreen() {
         <XStack marginBottom="$4" space="$4">
           <Button
             onPress={() => createFreePurchase.mutate()}
-            disabled={createFreePurchase.isLoading}
+            disabled={usedFree || createFreePurchase.isLoading}
+            color={usedFree ? '$gray10' : undefined}
           >
             {createFreePurchase.isLoading ? (
               <Spinner size="small" color="$green10" />
