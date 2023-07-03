@@ -123,8 +123,8 @@ export function OrderScreen() {
         <Card.Header padded>
           <XStack justifyContent="space-between" alignItems="center">
             <YStack>
-              <H2 color="$gray3Dark">Upgrade for $10</H2>
-              <Paragraph color="black">Get all 10 Styles with no watermark for $10</Paragraph>
+              <H2 color="white">Upgrade for $10</H2>
+              <Paragraph color="white">Get all 10 Styles with no watermark for $10</Paragraph>
             </YStack>
             <Button borderRadius="$10" {...payLinkProps}>
               Purchase
