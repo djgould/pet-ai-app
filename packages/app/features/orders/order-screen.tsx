@@ -113,7 +113,13 @@ export function OrderScreen() {
                 })
               }
             >
-              <ResultImage url={image.url as string} />
+              <ResultImage
+                url={
+                  order.data.tier === 'free'
+                    ? (image.watermarkedUrl as string)
+                    : (image.url as string)
+                }
+              />
 
               {
                 /* calculate index of image in the array of selectedImagesIndex */
