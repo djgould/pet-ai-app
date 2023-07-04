@@ -53,6 +53,7 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
           </ThemeProvider>
         </ClerkProvider>
       </PostHogProvider>
+
       <Analytics />
     </>
   )
