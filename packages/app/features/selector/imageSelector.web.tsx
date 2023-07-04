@@ -24,7 +24,7 @@ const RectangleSelector = ({ setImage, setSelectedImageIndex, image, index }: an
           image ? (
             <ZStack aspectRatio={1} f={1}>
               <Square
-                backgroundColor={'$backgroundStrong'}
+                backgroundColor={'$purple3Dark'}
                 f={1}
                 alignContent="center"
                 aspectRatio={1}
