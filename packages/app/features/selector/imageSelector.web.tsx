@@ -52,7 +52,7 @@ const RectangleSelector = ({ setImage, setSelectedImageIndex, image, index }: an
             <Button
               onClick={onClick}
               margin="-44px"
-              backgroundColor={'$backgroundStrong'}
+              backgroundColor={'$purple3Dark'}
               width="100%"
               height="100%"
             >
