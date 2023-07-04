@@ -6,7 +6,7 @@ export function useClient() {
   const { getToken } = useAuth()
 
   const client = axios.create({
-    baseURL: process.env.NEXT_BACKEND_URL || 'http://localhost:3000',
+    baseURL: process.env.NEXT_BACKEND_URL || 'https://pet-ai-backend.onrender.com',
   })
 
   client.interceptors.request.use(
