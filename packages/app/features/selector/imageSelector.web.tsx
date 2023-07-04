@@ -14,7 +14,7 @@ const RectangleSelector = ({ setImage, setSelectedImageIndex, image, index }: an
   const theme = useTheme()
 
   return (
-    <Square backgroundColor={'$backgroundStrong'} f={1} alignContent="center" aspectRatio={1}>
+    <Square backgroundColor={'$purple3Dark'} f={1} alignContent="center" aspectRatio={1}>
       <UploadButton
         uploader={uploader}
         options={{ multi: false, editor: { images: { cropRatio: 1 } } }}
