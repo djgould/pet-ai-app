@@ -6,12 +6,39 @@ import 'raf/polyfill'
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
 import { Provider } from 'app/provider'
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect } from 'react'
 import type { SolitoAppProps } from 'solito'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Analytics } from '@vercel/analytics/react'
 
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+import { useRouter } from 'next/router'
+
+// Check that PostHog is client-side (used to handle Next.js SSR)
+if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+    // Enable debug mode in development
+    loaded: (posthog) => {
+      if (process.env.NODE_ENV === 'development') posthog.debug()
+    },
+  })
+}
+
 function MyApp({ Component, pageProps }: SolitoAppProps) {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Track page views
+    const handleRouteChange = () => posthog?.capture('$pageview')
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
+
   return (
     <>
       <Head>
@@ -19,12 +46,13 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         <meta name="description" content="CharlieAI" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <ClerkProvider {...pageProps}>
-        <ThemeProvider>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </ClerkProvider>
+      <PostHogProvider client={posthog}>
+        <ClerkProvider {...pageProps}>
+          <ThemeProvider>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </ClerkProvider>
+      </PostHogProvider>
       <Analytics />
     </>
   )
