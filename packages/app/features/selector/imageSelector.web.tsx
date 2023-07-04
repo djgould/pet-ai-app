@@ -57,7 +57,9 @@ const RectangleSelector = ({ setImage, setSelectedImageIndex, image, index }: an
               height="100%"
             >
               {/** ^ I don't like this but it makes the divs equal width */}
-              <Text color="$color">+</Text>
+              <Text color="$color" fontSize={24}>
+                +
+              </Text>
             </Button>
           )
         }
