@@ -5,20 +5,32 @@ import { XStack, YStack } from '@tamagui/stacks'
 import { Uploader } from 'uploader'
 import { UploadButton } from 'react-uploader'
 import { useSelector } from './context'
-import { ZStack } from '@my/ui'
+import { useToast, useToastState, ZStack } from '@my/ui'
 import { CheckCircle, Pencil } from '@tamagui/lucide-icons'
 
 const uploader = Uploader({ apiKey: 'public_kW15b6k48wHEjGR8criKk5RMZ1Db' }) // Your real API key.
 
 const RectangleSelector = ({ setImage, setSelectedImageIndex, image, index }: any) => {
   const theme = useTheme()
+  const toast = useToastState()
 
   return (
     <Square backgroundColor={'$purple3Dark'} f={1} alignContent="center" aspectRatio={1}>
       <UploadButton
         uploader={uploader}
         options={{ multi: false, editor: { images: { cropRatio: 1 } } }}
-        onComplete={(files) => files[0] && setImage(files[0]?.fileUrl, index)}
+        onComplete={(files) => {
+          if (!files[0]) {
+            return null
+          }
+          let url = new URL(files[0].fileUrl)
+
+          let params = url.searchParams
+          params.set('w', '768')
+          params.set('h', '768')
+
+          setImage(url.toString(), index)
+        }}
       >
         {({ onClick }) =>
           image ? (

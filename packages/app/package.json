@@ -28,7 +28,8 @@
     "react-native-safe-area-context": "^4.5.2",
     "react-uploader": "^3.23.0",
     "solito": "^3.0.0",
-    "watermarkjs": "https://github.com/djgould/watermarkjs"
+    "watermarkjs": "https://github.com/djgould/watermarkjs",
+    "yet-another-react-lightbox": "^3.11.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

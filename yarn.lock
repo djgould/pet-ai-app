@@ -6609,6 +6609,7 @@ __metadata:
     react-uploader: ^3.23.0
     solito: ^3.0.0
     watermarkjs: "https://github.com/djgould/watermarkjs"
+    yet-another-react-lightbox: ^3.11.3
   languageName: unknown
   linkType: soft
 
@@ -20734,6 +20735,16 @@ __metadata:
     y18n: ^5.0.5
     yargs-parser: ^21.1.1
   checksum: 73b572e863aa4a8cbef323dd911d79d193b772defd5a51aab0aca2d446655216f5002c42c5306033968193bdbf892a7a4c110b0d77954a7fdf563e653967b56a
+  languageName: node
+  linkType: hard
+
+"yet-another-react-lightbox@npm:^3.11.3":
+  version: 3.11.3
+  resolution: "yet-another-react-lightbox@npm:3.11.3"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 7e1d8c06529d57b21aeeb3ace81600b4530e3d63dfb493f1335bb654f45571371561f24f57fb3f6043dd6ebb32ee12fdab59d467e4f640f26c271a6dabb6cb15
   languageName: node
   linkType: hard
 
