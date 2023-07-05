@@ -176,13 +176,16 @@ export function OrderScreen() {
               <Download />
             </Button>
           </a>
-          <Button onPress={() => downloadSelected.mutate()} disabled={downloadSelected.isLoading}>
+          {/*<Button onPress={() => downloadSelected.mutate()} disabled={downloadSelected.isLoading}>
             {downloadSelected.isLoading ? (
               <Spinner size="small" color="$green10" />
             ) : (
-              `Download Selected (${Object.values(selectedImageIds).filter((el) => el).length})`
+              <>
+                <Download />
+                `(${Object.values(selectedImageIds).filter((el) => el).length})`
+              </>
             )}
-          </Button>
+          </Button>*/}
         </XStack>
       )}
       {Object.entries(groupedResultImages).map(([label, images]) => {
@@ -197,10 +200,10 @@ export function OrderScreen() {
                     f={1}
                     position="relative"
                     onPress={() =>
-                      setSelectedImageIds({
-                        ...selectedImageIds,
-                        [image.id]: !selectedImageIds[image.id],
-                      })
+                      // setSelectedImageIds({
+                      //   ...selectedImageIds,
+                      //   [image.id]: !selectedImageIds[image.id],
+                      // })
                     }
                   >
                     <ResultImage
