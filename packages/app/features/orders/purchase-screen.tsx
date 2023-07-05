@@ -190,8 +190,7 @@ export function PurchaseScreen() {
         <XStack marginBottom="$4" space="$4">
           <Button
             onPress={() => createFreePurchase.mutate()}
-            disabled={usedFree || createFreePurchase.isLoading}
-            color={usedFree ? '$gray10' : undefined}
+            disabled={createFreePurchase.isLoading}
           >
             {createFreePurchase.isLoading ? (
               <Spinner size="small" color="$green10" />
