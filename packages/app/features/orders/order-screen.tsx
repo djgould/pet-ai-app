@@ -204,6 +204,7 @@ export function OrderScreen() {
                       //   ...selectedImageIds,
                       //   [image.id]: !selectedImageIds[image.id],
                       // })
+                      null
                     }
                   >
                     <ResultImage
