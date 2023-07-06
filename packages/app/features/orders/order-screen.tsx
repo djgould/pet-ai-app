@@ -36,6 +36,8 @@ import { OrderCard } from './OrderCard'
 import { useLink } from 'solito/link'
 import ResultImage from './ResultImage'
 import axios from 'axios'
+import Lightbox from 'yet-another-react-lightbox'
+import DownloadPlugin from 'yet-another-react-lightbox/plugins/download'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -52,6 +54,8 @@ export function OrderScreen() {
   const client = useClient()
   const { push } = useRouter()
   const order = useOrder(id)
+  const [lightboxOpen, setLightboxOpen] = React.useState(false)
+  const [lightboxIndex, setLightboxIndex] = React.useState(0)
 
   const resultImages = order.data?.resultImages ? splitArray(order.data?.resultImages, 5) : []
 
@@ -111,6 +115,12 @@ export function OrderScreen() {
       alignContent="center"
       jc="center"
     >
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={order.data?.resultImages?.map((image) => ({ src: image.url }))}
+        plugins={[DownloadPlugin]}
+      />
       <XStack position="absolute" top="$4" left="$4" zIndex={4}>
         <Button {...backLinkProps}>
           <ArrowLeft />
@@ -199,13 +209,12 @@ export function OrderScreen() {
                     aspectRatio={1}
                     f={1}
                     position="relative"
-                    onPress={() =>
-                      // setSelectedImageIds({
-                      //   ...selectedImageIds,
-                      //   [image.id]: !selectedImageIds[image.id],
-                      // })
-                      null
-                    }
+                    onPress={() => {
+                      setLightboxOpen(true)
+                      setLightboxIndex(
+                        order.data?.resultImages.findIndex((el) => el.id === image.id)
+                      )
+                    }}
                   >
                     <ResultImage
                       url={

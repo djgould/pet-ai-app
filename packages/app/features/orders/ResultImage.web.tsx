@@ -1,5 +1,5 @@
 import { Image, Square } from '@my/ui'
-import { useEffect, useState } from 'react'
+import 'yet-another-react-lightbox/styles.css'
 
 export interface Props {
   url: string
