@@ -186,7 +186,7 @@ export function PurchaseScreen() {
           <Paragraph ta="center">
             Our platform is built on top of cutting edge GPUs that are expensive to run. We charge a
             monthly subscription fee to cover these costs and will continue to release new styles
-            and features to our paying customer.
+            and features to our paying customers.
           </Paragraph>
         </YStack>
 

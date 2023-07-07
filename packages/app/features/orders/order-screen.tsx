@@ -41,6 +41,8 @@ import DownloadPlugin from 'yet-another-react-lightbox/plugins/download'
 import Captions from 'yet-another-react-lightbox/plugins/captions'
 import 'yet-another-react-lightbox/plugins/captions.css'
 import { useUser } from 'app/provider/User'
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -72,29 +74,23 @@ export function OrderScreen() {
   })
 
   const [selectedImageIds, setSelectedImageIds] = React.useState<{}>({})
-  const downloadSelected = useMutation(async () => {
-    const response = await client.post(
-      `/orders/${id}/download-selected`,
-      {
-        ids: Object.entries(selectedImageIds)
-          .filter(([, value]) => value)
-          .map(([key]) => key),
-      },
-      {
-        responseType: 'blob',
-      }
-    )
 
-    const url = window.URL.createObjectURL(new Blob([response.data]))
-    const link = document.createElement('a')
-    link.href = url
-    link.setAttribute('download', 'images.zip')
-    document.body.appendChild(link)
-    link.click()
-    link.remove()
+  const downloadImages = useMutation(async () => {
+    const imageUrls = order.data?.resultImages.map((resultImage) => resultImage.url) // The URLs of the images you want to download.
+    const zip = new JSZip()
 
-    // Reset selected images
-    setSelectedImageIds([])
+    const imagePromises = imageUrls.map(async (url, index) => {
+      const response = await fetch(url)
+      const blob = await response.blob()
+      zip.file(`image-${index + 1}.png`, blob, { binary: true })
+    })
+
+    // Wait for all images to be added to the zip
+    await Promise.all(imagePromises)
+
+    // Generate the zip file and trigger a download
+    const content = await zip.generateAsync({ type: 'blob' })
+    saveAs(content, 'images.zip')
   })
 
   // resultImages have a label and we want to group them by label
@@ -187,18 +183,16 @@ export function OrderScreen() {
       {Boolean(resultImages.length) && (
         <XStack space="$4">
           <H3>Generated Images</H3>
-          <a
-            href={
-              user.data?.tier !== 'basic'
-                ? `https://deving-pet-ai.s3.amazonaws.com//result_images/${id}-watermarked-result-images.zip`
-                : `https://deving-pet-ai.s3.amazonaws.com//result_images/${id}-result-images.zip`
-            }
-            download
-          >
-            <Button>
-              <Download />
-            </Button>
-          </a>
+          <Button onPress={() => downloadImages.mutate()} disabled={downloadImages.isLoading}>
+            {downloadImages.isLoading ? (
+              <Spinner size="small" color="$green10" />
+            ) : (
+              <>
+                <Download />
+                `(${Object.values(selectedImageIds).filter((el) => el).length})`
+              </>
+            )}
+          </Button>
           {/*<Button onPress={() => downloadSelected.mutate()} disabled={downloadSelected.isLoading}>
             {downloadSelected.isLoading ? (
               <Spinner size="small" color="$green10" />
