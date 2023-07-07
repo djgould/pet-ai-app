@@ -1,5 +1,6 @@
 import { Card, H2, Paragraph, XStack, Spinner, Button, H1, YStack, Image, Progress } from '@my/ui'
 import { AlertCircle, Moon } from '@tamagui/lucide-icons'
+import { useUser } from 'app/provider/User'
 import { DateTime } from 'luxon'
 import { Link, useLink } from 'solito/link'
 
@@ -61,10 +62,12 @@ export function OrderCard({ order }) {
 }
 
 function OrderStatus({ status }) {
+  const user = useUser()
+
   if (status === 'UPLOADING_MODEL' || status === 'INFERING' || status === 'TRAINING') {
     return <H2>Generating Images</H2>
   } else if (status === 'PENDING') {
-    return <H2>Payment Required</H2>
+    return user.data?.tier !== 'basic' ? <H2>Payment Required</H2> : <H2>Pending</H2>
   } else if (status === 'COMPLETED') {
     return <H2>Completed</H2>
   } else if (status === 'FAILED') {
