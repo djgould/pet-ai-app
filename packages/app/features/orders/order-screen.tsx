@@ -121,7 +121,7 @@ export function OrderScreen() {
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
         slides={order.data?.resultImages?.map((image) => ({
-          src: order.data?.tier === 'free' ? image.watermarkedUrl : image.url,
+          src: user.data?.tier !== 'basic' ? image.watermarkedUrl : image.url,
         }))}
         plugins={[DownloadPlugin]}
       />
@@ -182,7 +182,7 @@ export function OrderScreen() {
           <H3>Generated Images</H3>
           <a
             href={
-              order.data.tier === 'free'
+              user.data?.tier !== 'basic'
                 ? `https://deving-pet-ai.s3.amazonaws.com//result_images/${id}-watermarked-result-images.zip`
                 : `https://deving-pet-ai.s3.amazonaws.com//result_images/${id}-result-images.zip`
             }
@@ -224,7 +224,7 @@ export function OrderScreen() {
                   >
                     <ResultImage
                       url={
-                        order.data.tier === 'free'
+                        user.data?.tier !== 'basic'
                           ? (image.watermarkedUrl as string)
                           : (image.url as string)
                       }
