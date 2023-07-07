@@ -256,10 +256,11 @@ export function OrderScreen() {
 }
 
 function getOrderStatus({ status }) {
+  const user = useUser()
   if (status === 'UPLOADING_MODEL' || status === 'INFERING' || status === 'TRAINING') {
     return 'Generating Images'
   } else if (status === 'PENDING') {
-    return 'Payment Required'
+    return user.data?.tier !== 'basic' ? 'Payment Required' : 'Pending'
   } else if (status === 'COMPLETED') {
     return 'Completed'
   } else if (status === 'FAILED') {
