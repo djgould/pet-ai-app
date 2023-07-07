@@ -118,7 +118,9 @@ export function OrderScreen() {
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
-        slides={order.data?.resultImages?.map((image) => ({ src: image.url }))}
+        slides={order.data?.resultImages?.map((image) => ({
+          src: order.data?.tier === 'free' ? image.watermarkedUrl : image.url,
+        }))}
         plugins={[DownloadPlugin]}
       />
       <XStack position="absolute" top="$4" left="$4" zIndex={4}>
