@@ -189,7 +189,6 @@ export function OrderScreen() {
             ) : (
               <>
                 <Download />
-                `(${Object.values(selectedImageIds).filter((el) => el).length})`
               </>
             )}
           </Button>
