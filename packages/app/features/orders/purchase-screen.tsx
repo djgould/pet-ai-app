@@ -205,7 +205,7 @@ export function PurchaseScreen() {
             {createCheckoutSession.isLoading ? (
               <Spinner size="small" color="$green10" />
             ) : (
-              '$10 (10 Styles)'
+              '7 Day Free Trial'
             )}
           </Button>
         </XStack>
