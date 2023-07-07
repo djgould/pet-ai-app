@@ -38,6 +38,7 @@ import ResultImage from './ResultImage'
 import axios from 'axios'
 import Lightbox from 'yet-another-react-lightbox'
 import DownloadPlugin from 'yet-another-react-lightbox/plugins/download'
+import { useUser } from 'app/provider/User'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -56,6 +57,7 @@ export function OrderScreen() {
   const order = useOrder(id)
   const [lightboxOpen, setLightboxOpen] = React.useState(false)
   const [lightboxIndex, setLightboxIndex] = React.useState(0)
+  const user = useUser()
 
   const resultImages = order.data?.resultImages ? splitArray(order.data?.resultImages, 5) : []
 
@@ -142,7 +144,7 @@ export function OrderScreen() {
         ))}
       </XStack>
       <Separator />
-      {order.data?.tier === 'free' && (
+      {user.data?.tier === 'free' && (
         <Card
           elevate
           size="$4"
@@ -156,8 +158,10 @@ export function OrderScreen() {
           <Card.Header padded>
             <XStack justifyContent="space-between" alignItems="center">
               <YStack>
-                <H2 color="white">Upgrade for $10</H2>
-                <Paragraph color="white">Get all 10 Styles with no watermark for $10</Paragraph>
+                <H2 color="white">Start a 7 day free trial</H2>
+                <Paragraph color="white">
+                  Get 3 trainings per month and access to all styles
+                </Paragraph>
               </YStack>
             </XStack>
           </Card.Header>
