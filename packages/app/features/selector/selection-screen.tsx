@@ -1,6 +1,7 @@
 import { Button, Spinner, useToastController, XStack, YStack, ZStack } from '@my/ui'
 import { ArrowLeft } from '@tamagui/lucide-icons'
 import { useOrders } from 'app/provider/Order'
+import { useUser } from 'app/provider/User'
 import { AxiosError } from 'axios'
 import React from 'react'
 import { createParam } from 'solito'
@@ -27,6 +28,7 @@ function SelectedScreenContent() {
   const backLinkProps = useLink({
     href: '/orders',
   })
+  const user = useUser()
 
   const submit = () => {
     if (images.some((image) => image === null)) {
@@ -37,8 +39,11 @@ function SelectedScreenContent() {
       { urls: images as string[] },
       {
         onSuccess: (data) => {
-          console.log(data)
-          push(`/orders/${data.id}/payment`)
+          if (user.data?.tier === 'basic') {
+            return push(`/orders/${data.id}`)
+          } else {
+            return push(`/orders/${data.id}/payment`)
+          }
         },
         onError: (error) => {
           if (error instanceof AxiosError) {
