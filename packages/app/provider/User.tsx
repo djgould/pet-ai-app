@@ -12,7 +12,7 @@ interface User {
 export function useUser() {
   const client = useClient()
   const user = useQuery(['user'], async () => {
-    const { data } = await client.get<User>(`/users/me`)
+    const { data } = await client.get<User>(`/user/me`)
 
     return data
   })
