@@ -104,8 +104,8 @@ export function PurchaseScreen() {
   ]
 
   return (
-    <YStack f={1} jc="center" ai="center" fullscreen overflow="hidden">
-      <YStack fullscreen zIndex={'$1'} f={1} jc="center" ai="center" space="$3">
+    <YStack f={1} jc="center" ai="center">
+      <YStack zIndex={'$1'} f={1} jc="center" ai="center" space="$3">
         <YStack space="$2" maw={600}>
           <H2 ta="center">Almost Ready!</H2>
           <Paragraph ta="center">Complete Payment to finish your order</Paragraph>
@@ -184,9 +184,9 @@ export function PurchaseScreen() {
 
         <YStack space="$4" maw={600} pb="$4">
           <Paragraph ta="center">
-            Our platform is built on top of cutting edge GPUs that cost us money to run. We charge a
+            Our platform is built on top of cutting edge GPUs that are expensive to run. We charge a
             monthly subscription fee to cover these costs and will continue to release new styles
-            and features.
+            and features to our paying customer.
           </Paragraph>
         </YStack>
 
