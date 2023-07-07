@@ -38,6 +38,8 @@ import ResultImage from './ResultImage'
 import axios from 'axios'
 import Lightbox from 'yet-another-react-lightbox'
 import DownloadPlugin from 'yet-another-react-lightbox/plugins/download'
+import Captions from 'yet-another-react-lightbox/plugins/captions'
+import 'yet-another-react-lightbox/plugins/captions.css'
 import { useUser } from 'app/provider/User'
 
 const { useParam } = createParam<{ id: string }>()
@@ -120,10 +122,15 @@ export function OrderScreen() {
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
-        slides={order.data?.resultImages?.map((image) => ({
+        slides={order.data?.resultImages?.map((image, i) => ({
           src: user.data?.tier !== 'basic' ? image.watermarkedUrl : image.url,
+          title: `${image.label.charAt(0).toUpperCase() + image.label.slice(1)}`,
+          download: {
+            filename: `${image.label}-${i}.jpeg`,
+            url: user.data?.tier !== 'basic' ? image.watermarkedUrl : image.url,
+          },
         }))}
-        plugins={[DownloadPlugin]}
+        plugins={[DownloadPlugin, Captions]}
       />
       <XStack position="absolute" top="$4" left="$4" zIndex={4}>
         <Button {...backLinkProps}>

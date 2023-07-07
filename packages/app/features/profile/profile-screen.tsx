@@ -7,6 +7,9 @@ export function ProfileScreen() {
       <SignedIn>
         <XStack justifyContent="space-between" ai="center" width={'100%'} maxWidth={600} py={'$4'}>
           <H1>Your Profile</H1>
+          <a href="mailto:devin@charlieai.app">
+            <Button>Support</Button>
+          </a>
           <a href="https://billing.stripe.com/p/login/eVa5oj8or81O4ta144">
             <Button>Manage subscription</Button>
           </a>
