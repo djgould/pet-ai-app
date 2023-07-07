@@ -14,6 +14,7 @@ import { Analytics } from '@vercel/analytics/react'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { useRouter } from 'next/router'
+import { dark } from '@clerk/themes'
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
@@ -47,7 +48,12 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PostHogProvider client={posthog}>
-        <ClerkProvider {...pageProps}>
+        <ClerkProvider
+          {...pageProps}
+          appearance={{
+            baseTheme: dark,
+          }}
+        >
           <ThemeProvider>
             <Component {...pageProps} />
           </ThemeProvider>

@@ -13,7 +13,7 @@ import {
   H1,
 } from '@my/ui'
 import { LinearGradient } from '@tamagui/linear-gradient'
-import { Star, ChevronRight, Moon, Pencil, Plus } from '@tamagui/lucide-icons'
+import { Star, ChevronRight, Moon, Pencil, Plus, UserCircle2 } from '@tamagui/lucide-icons'
 import { useMutation } from '@tanstack/react-query'
 import { useClient } from 'app/provider/client'
 import { useOrders } from 'app/provider/Order'
@@ -24,6 +24,7 @@ import { DateTime } from 'luxon'
 import { OrderCard } from './OrderCard'
 import { NoOrdersCard } from './NoOrdersCard'
 import { useLink } from 'solito/link'
+import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -34,6 +35,9 @@ export function OrdersScreen() {
   const { orders } = useOrders()
   const linkProps = useLink({
     href: '/selector',
+  })
+  const profileLinkProps = useLink({
+    href: '/profile',
   })
 
   if (orders.isFetched && orders.data?.length === 0) {
@@ -49,14 +53,14 @@ export function OrdersScreen() {
 
   return (
     <YStack f={1} jc="center" ai="center">
-      <XStack justifyContent="center" alignItems="center">
-        <Button mt="$2" ml="$4" theme="blue" {...linkProps} opacity={0} size="$3">
-          <Plus />
+      <XStack justifyContent="center" alignItems="center" space="$4">
+        <Button mt="$2" theme="blue" size="$3" {...profileLinkProps}>
+          <UserCircle2 />
         </Button>
         <H1 flexGrow={1} textAlign="center">
           Your Orders
         </H1>
-        <Button mt="$2" ml="$4" theme="blue" {...linkProps} size="$3">
+        <Button mt="$2" theme="blue" {...linkProps} size="$3">
           <Plus />
         </Button>
       </XStack>
