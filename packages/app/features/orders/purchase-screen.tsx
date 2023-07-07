@@ -143,7 +143,8 @@ export function PurchaseScreen() {
 
         <YStack space="$4" maw={600}>
           <Paragraph ta="center">
-            Your order includes 100 generated photos in 10 different styles
+            A CharlieAI subscription includes 3 trainings per month, all 10 current styles, and
+            access to all future styles (2 added per month)
           </Paragraph>
         </YStack>
 
@@ -183,7 +184,9 @@ export function PurchaseScreen() {
 
         <YStack space="$4" maw={600} pb="$4">
           <Paragraph ta="center">
-            After Payment the image generation process will begin and takes approximately 70 minutes{' '}
+            Our platform is built on top of cutting edge GPUs that cost us money to run. We charge a
+            monthly subscription fee to cover these costs and will continue to release new styles
+            and features.
           </Paragraph>
         </YStack>
 
