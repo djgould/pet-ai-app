@@ -130,7 +130,7 @@ export function OrderScreen() {
           <ArrowLeft />
         </Button>
       </XStack>
-      <H2 textAlign="center">{order.data && getOrderStatus(order.data)}</H2>
+      <H2 textAlign="center">{order.data && getOrderStatus(order.data, user.data)}</H2>
       <Paragraph theme="alt2" textAlign="center">
         Order created on {DateTime.fromISO(order.data?.createdAt).toFormat("MM-dd-yy 'at' HH:mm")}
       </Paragraph>
@@ -255,12 +255,11 @@ export function OrderScreen() {
   )
 }
 
-function getOrderStatus({ status }) {
-  const user = useUser()
+function getOrderStatus({ status }, user) {
   if (status === 'UPLOADING_MODEL' || status === 'INFERING' || status === 'TRAINING') {
     return 'Generating Images'
   } else if (status === 'PENDING') {
-    return user.data?.tier !== 'basic' ? 'Payment Required' : 'Pending'
+    return user?.tier !== 'basic' ? 'Payment Required' : 'Pending'
   } else if (status === 'COMPLETED') {
     return 'Completed'
   } else if (status === 'FAILED') {
