@@ -188,7 +188,7 @@ export function PurchaseScreen() {
         </YStack>
 
         <XStack marginBottom="$4" space="$4">
-          <Button
+          {/*<Button
             onPress={() => createFreePurchase.mutate()}
             disabled={createFreePurchase.isLoading}
           >
@@ -197,7 +197,7 @@ export function PurchaseScreen() {
             ) : (
               'Free (1 Style w/ Watermark)'
             )}
-          </Button>
+            </Button>*/}
           <Button
             onPress={() => createCheckoutSession.mutate()}
             disabled={createCheckoutSession.isLoading}
