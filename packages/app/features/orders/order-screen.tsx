@@ -118,6 +118,7 @@ export function OrderScreen() {
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
         slides={order.data?.resultImages?.map((image, i) => ({
           src: user.data?.tier !== 'basic' ? image.watermarkedUrl : image.url,
           title: `${image.label.charAt(0).toUpperCase() + image.label.slice(1)}`,
