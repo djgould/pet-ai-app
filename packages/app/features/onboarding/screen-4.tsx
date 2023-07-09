@@ -20,7 +20,7 @@ import { SignUp } from '@clerk/nextjs'
 
 export function Screen4() {
   const linkProps = useLink({
-    href: '/selector',
+    href: 'https://accounts.charlieai.app/sign-up',
   })
 
   return (
