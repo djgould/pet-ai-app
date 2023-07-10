@@ -140,6 +140,131 @@ export default function Page() {
             </YStack>
           </XStack>
         </YStack>
+        <YStack alignItems="center" space="$4" backgroundColor={'$blue2Dark'} py="$10">
+          <XStack maxWidth={600} justifyContent={'center'}>
+            <H1 textAlign="center">See what our customers have been creating</H1>
+          </XStack>
+          <XStack
+            space="$4"
+            width={'100%'}
+            maxWidth={1000}
+            justifyContent="center"
+            alignContent="stretch"
+          >
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/51745853-5d6c-4c86-e358-ebdb45537400/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/8f4c9f90-c893-4e1a-a86b-1b4f0e9fb600/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/b2d0966e-e157-4d85-6fc4-3f94243e7b00/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/cfefec61-63e3-4ce4-01a7-bc05e23ba700/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+          </XStack>
+          <XStack
+            space="$4"
+            width={'100%'}
+            maxWidth={1000}
+            justifyContent="center"
+            alignContent="stretch"
+          >
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/1f06e666-0f40-43ef-9caa-d1d4888ff900/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/d727be3f-f9ea-43b2-70d6-c1fcbaea2b00/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/557dc67e-7ae4-49b3-0497-db364e1aff00/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/717e2119-1428-443a-e979-90a96c826e00/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+          </XStack>
+          <XStack
+            space="$4"
+            width={'100%'}
+            maxWidth={1000}
+            justifyContent="center"
+            alignContent="stretch"
+          >
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/2113ba4f-e2e0-4d95-20aa-e38d0c44de00/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/21533073-804f-409f-df92-1189ebf06700/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/f3773088-61ce-4d74-6db2-0694b0f84600/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+            <Image
+              source={{
+                uri: 'https://imagedelivery.net/Pg1MxPV3UBYR5Z4j-Ai2dQ/3e9e07ea-e92c-4164-0f6e-460ef0dfd800/public',
+              }}
+              flexGrow={1}
+              aspectRatio={1}
+              borderRadius={'$3'}
+            />
+          </XStack>
+        </YStack>
         <XStack
           borderTopWidth={1}
           borderTopColor={'$gray6'}
