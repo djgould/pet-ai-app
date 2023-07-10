@@ -88,7 +88,7 @@ export default function Page() {
               </H1>
             </H1>
           </XStack>
-          <XStack maxWidth={600} justifyContent={'center'}>
+          <XStack maxWidth={600} justifyContent={'center'} px={'$4'}>
             <Paragraph textAlign="center">
               Take pictures of your dog and generate a hundred new and fun images. Join thousands of
               happy customers and have fun with your pup today!
@@ -101,6 +101,7 @@ export default function Page() {
           </XStack>
           <XStack
             maxWidth={1000}
+            px="$4"
             justifyContent="center"
             alignContent="stretch"
             width="100%"
@@ -140,14 +141,15 @@ export default function Page() {
             </YStack>
           </XStack>
         </YStack>
-        <YStack alignItems="center" space="$4" backgroundColor={'$blue2Dark'} py="$10">
+        <YStack alignItems="center" space="$4" backgroundColor={'$blue2Dark'} py="$6">
           <XStack maxWidth={600} justifyContent={'center'}>
-            <H1 textAlign="center">See what our customers have been creating</H1>
+            <H2 textAlign="center">See what our customers have been creating</H2>
           </XStack>
           <XStack
             space="$4"
             width={'100%'}
             maxWidth={1000}
+            px="$4"
             justifyContent="center"
             alignContent="stretch"
           >
@@ -188,6 +190,7 @@ export default function Page() {
             space="$4"
             width={'100%'}
             maxWidth={1000}
+            px="$4"
             justifyContent="center"
             alignContent="stretch"
           >
@@ -228,6 +231,7 @@ export default function Page() {
             space="$4"
             width={'100%'}
             maxWidth={1000}
+            px="$4"
             justifyContent="center"
             alignContent="stretch"
           >
