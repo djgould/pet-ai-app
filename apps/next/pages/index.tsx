@@ -96,7 +96,7 @@ export default function Page() {
           </XStack>
           <XStack justifyContent="center">
             <Button backgroundColor="$blue8" {...linkProps}>
-              Try it out
+              Start a free trial
             </Button>
           </XStack>
           <XStack
